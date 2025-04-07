@@ -39,7 +39,7 @@ const Menulist = ({
 							activeMenu[level] === item.title
 								? 'active'
 								: ''
-						}`}
+						} tw:flex tw:flex-row`}
 						href={item?.url ? item.url : '#javascript'}
 						onClick={() => {
 							const temp = activeMenu;

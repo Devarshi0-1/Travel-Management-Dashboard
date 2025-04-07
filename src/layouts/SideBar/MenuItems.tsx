@@ -8,12 +8,6 @@ export const MENUITEMS: MenuItem[] = [
 		type: 'link',
 	},
 	{
-		title: 'Orginization',
-		url: `/orginization/new`,
-		icon: 'Home',
-		type: 'link',
-	},
-	{
 		title: 'users',
 		icon: 'Users',
 		type: 'sub',

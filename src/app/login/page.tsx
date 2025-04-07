@@ -22,8 +22,8 @@ const Login = () => {
 				}
 			);
 
-            localStorage.setItem('token', data.token.access);
-            router.push('/dashboard')
+			localStorage.setItem('token', data.token.access);
+			router.push('/dashboard');
 			console.log('Login Data', data.token.access);
 		} catch (error) {
 			console.log(error);

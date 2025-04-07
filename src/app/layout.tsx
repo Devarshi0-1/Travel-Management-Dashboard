@@ -28,7 +28,10 @@ export default function RootLayout({
 			<body>
 				<Providers>{children}</Providers>
 				<ToastContainer />
-				<Toaster />
+				<Toaster
+					richColors
+					closeButton
+				/>
 			</body>
 		</html>
 	);
