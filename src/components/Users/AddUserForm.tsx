@@ -11,85 +11,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '../ui/button';
-
-type TGender = 'male' | 'female' | 'other';
-
-type TRole = {
-	id: 7;
-	name: string;
-	description: string;
-	permissions: {
-		tax: {
-			view_tax: boolean;
-			create_tax: boolean;
-			delete_tax: boolean;
-			update_tax: boolean;
-		};
-		role: {
-			view_role: boolean;
-			assign_role: boolean;
-			delete_role: boolean;
-			update_role: boolean;
-		};
-		user: {
-			add_user: boolean;
-			view_user: boolean;
-			delete_user: boolean;
-			update_user: boolean;
-		};
-		booking: {
-			view_booking: boolean;
-			create_booking: boolean;
-			delete_booking: boolean;
-			update_booking: boolean;
-		};
-		invoice: {
-			view_invoice: boolean;
-			create_invoice: boolean;
-			delete_invoice: boolean;
-			update_invoice: boolean;
-		};
-		selfuser: {
-			view_selfuser: boolean;
-			update_selfuser: boolean;
-		};
-		permission: {
-			view_permissions: boolean;
-			manage_permissions: boolean;
-		};
-		organization: {
-			view_organization: boolean;
-			create_organization: boolean;
-			delete_organization: boolean;
-			update_organization: boolean;
-		};
-		invoice_layout: {
-			view_layout: boolean;
-			create_layout: boolean;
-			delete_layout: boolean;
-			update_layout: boolean;
-		};
-		product_type_tax: {
-			view_product_tax: boolean;
-			create_product_tax: boolean;
-			delete_product_tax: boolean;
-			update_product_tax: boolean;
-		};
-		invoice_legal_term: {
-			view_legal_term: boolean;
-			create_legal_term: boolean;
-			delete_legal_term: boolean;
-			update_legal_term: boolean;
-		};
-		organization_member: {
-			view_organization_member: boolean;
-			create_organization_member: boolean;
-			delete_organization_member: boolean;
-			update_organization_member: boolean;
-		};
-	};
-	organization: 2;
-};
+import { TGender, TRole } from '@/types/type';
 
 const genders = ['Male', 'Female', 'Other'];
 
@@ -103,7 +25,7 @@ const AddUserForm = () => {
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
 	const [role, setRole] = useState<TRole['name'] | null>(null);
 	const [roles, setRoles] = useState<TRole[]>([]);
-	const [gender, setGender] = useState<TGender | null>(null);
+    const [gender, setGender] = useState<TGender | null>(null);
 
 	const resetForm = () => {
 		setFirstName('');
@@ -142,13 +64,13 @@ const AddUserForm = () => {
 				`${process.env.NEXT_PUBLIC_BASE_URL}/api/organization/members/`,
 				{
 					email: email.toLowerCase(),
-					password: password.toLowerCase(),
-					confirm_password: confirmPassword.toLowerCase(),
+					password: password,
+					confirm_password: confirmPassword,
 					role: role.toLowerCase(),
-					first_name: firstName.toLowerCase(),
-					last_name: lastName.toLowerCase(),
-					ph_number: phoneNumber.toLowerCase(),
-					dob: dateOfBirth.toLowerCase(),
+					first_name: firstName,
+					last_name: lastName,
+					ph_number: phoneNumber,
+					dob: dateOfBirth,
 					gender: gender.toLowerCase(),
 				},
 				{
@@ -205,13 +127,15 @@ const AddUserForm = () => {
 							<SelectValue placeholder='Role' />
 						</SelectTrigger>
 						<SelectContent>
-							{roles.map((role) => (
-								<SelectItem
-									key={role.id}
-									value={role.name}>
-									{role.name}
-								</SelectItem>
-							))}
+							{roles
+								.filter((role) => role.name !== 'OWNER')
+								.map((role) => (
+									<SelectItem
+										key={role.id}
+										value={role.name}>
+										{role.name}
+									</SelectItem>
+								))}
 						</SelectContent>
 					</Select>
 				</div>
@@ -280,7 +204,6 @@ const AddUserForm = () => {
 						placeholder='2002-12-17'
 						required
 					/>
-                      
 				</div>
 			</div>
 			<div className='mb-3'>

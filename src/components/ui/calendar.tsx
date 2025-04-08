@@ -15,6 +15,9 @@ function Calendar({
 }: React.ComponentProps<typeof DayPicker>) {
 	return (
 		<DayPicker
+			captionLayout='dropdown'
+			fromYear={2010}
+			toYear={2024}
 			showOutsideDays={showOutsideDays}
 			className={cn('tw:p-3', className)}
 			classNames={{
